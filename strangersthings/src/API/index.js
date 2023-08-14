@@ -28,4 +28,34 @@ export const RegisterSignInData = async (username, password) => {
     } catch (error) {
         console.log(error);
     }
-  }
+}
+
+
+/*GET/users/me: CONFIRMS PROPER USER INTERFACE 
+  (template literal,required)*/
+
+
+
+/*GET/posts : REQUESTS TO FETCH POST ARRAYS 
+  (template literal,required)"*/
+
+
+
+/*POST/posts: ATTEMPTS TO CREATE A NEW POST 
+  (template literal,required)*/
+
+
+
+/*PATCH/posts/POST_ID: WILL EDIT A POST WHOSE _id is EQUAL to POST_ID 
+  (template literal,required)*/
+
+
+
+/*DELETE/posts/POST_ID: WILL DELETE A POST WHOSE _id is EQUAL to POST_ID 
+  (template literal,required)*/
+
+
+
+  /*POST /posts/POST_ID/messages: WILL CREATE A NEW MESSAGE FOR 
+  POST whose _id EQUALS POST_ID(template literal,required)*/
+

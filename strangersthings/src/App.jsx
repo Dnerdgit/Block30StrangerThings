@@ -1,9 +1,12 @@
+// import HOMEPAGE HERE!
 import CreateAccount from './components/CreateAccount'
 import SignInPage from './components/SignIn';
+// import POST HERE!
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
 
-const BASE_URL = `https://strangers-things.herokuapp.com/api/2302-ACC-CT-WEB-PT-A/`
+// const COHORT = "2302-ACC-CT-WEB-PT-A"
+// const BASE_URL = `https://strangers-things.herokuapp.com/api/2302-ACC-CT-WEB-PT-A/`
 
 function App() {
   
@@ -12,9 +15,10 @@ function App() {
     <>
       
         <Routes>
-          {/* <Route path='/' element={<></>}/> */}
+          {/* <Route path='/' element={</>}/> ADD HOMEPAGE ELEMENT HERE*/}   
           <Route path="/create" element={<CreateAccount />}/>
           <Route path="/sign" element={<SignInPage />}/>
+          {/* <Route path="/posts" element={< />}/> ADD POSTs ELEMENT HERE (add more if needed)*/}
         </Routes>
      
     </>

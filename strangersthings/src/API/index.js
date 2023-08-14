@@ -1,5 +1,5 @@
 const COHORT = "2302-ACC-CT-WEB-PT-A"
-const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT}`
+const BASE_URL = `https://strangers-things.herokuapp.com/api/2302-ACC-CT-WEB-PT-A`
 
   
 //POSTS/users/register: REGISTER ACCOUNT/CreateAccount.jsx  

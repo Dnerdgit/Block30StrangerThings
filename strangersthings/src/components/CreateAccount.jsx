@@ -31,10 +31,10 @@ export default function CreateAccount({ posted, setPosted }) {
 
     <div className="signInApp">
         {error && <p>{error}</p>}
-        <h2>Sign Up Page</h2>
+        <h2>Create Account</h2>
         <form onSubmit={handleSubmit} className='sign-up-form'>
             <label>
-                Username: 
+                Username 
             <input
                 id="name"
                 type="text"
@@ -46,7 +46,7 @@ export default function CreateAccount({ posted, setPosted }) {
                 <br/>
                 <br/>
             <label>
-                Password: 
+                Password 
             <input
                 id="password"
                 type="password"
@@ -58,7 +58,7 @@ export default function CreateAccount({ posted, setPosted }) {
                 <br/>
                 <br/>
             <label>
-                Confirm Password: 
+                Confirm Password 
             <input
                 id="acceptPass"
                 type="password"

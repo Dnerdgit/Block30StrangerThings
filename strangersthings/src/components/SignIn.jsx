@@ -18,7 +18,7 @@ export default function SignInPage() {
         <h2>Sign In</h2>
         <form onSubmit={handleSubmit} className='sign-up-form'>
             <label>
-                Username: 
+                Username 
             </label>
             <input
                 type="text"
@@ -30,7 +30,7 @@ export default function SignInPage() {
                 <br/>
                 <br/>
             <label>
-                Password: 
+                Password 
             </label>
             <input
                 type="password"
@@ -41,19 +41,8 @@ export default function SignInPage() {
                 />
                 <br/>
                 <br/>
-            {/* <label>
-                Confirm Password: 
-            </label>
-            <input
-                type="password"
-                name="acceptPass"
-                value={acceptPass}
-                onChange={(e) => setAcceptPass(e.target.value)}
-                id="acceptPass"
-                />
-                <br/>
-                <br/> */}
-                <button onClick={password ? onClick="submit" : password}>Sign In</button>
+       
+                <button onClick={setUserName === username && setPassword === password ? onClick="submit" : username && password}>Sign In</button>
         </form>
     </div>
 

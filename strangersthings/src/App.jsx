@@ -1,5 +1,5 @@
 import { RegisterSignInData } from './API';
-import { CreateAccount } from './components/CreateAccount.jsx';
+import { CreateAccount } from './components/CreateAccount';
 import { SignInPage } from './components/SignIn';
 import './App.css'
 

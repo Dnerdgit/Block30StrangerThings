@@ -53,7 +53,7 @@ export default function SignInPage() {
                 />
                 <br/>
                 <br/> */}
-                <button onClick={(() => (setPassword(password)))}>Continue</button>
+                <button onClick={password ? onClick="submit" : password}>Sign In</button>
         </form>
     </div>
 

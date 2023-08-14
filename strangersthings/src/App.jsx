@@ -1,6 +1,6 @@
-import { RegisterSignInData } from './API';
-import { CreateAccount } from './components/CreateAccount';
-import { SignInPage } from './components/SignIn';
+import CreateAccount from './components/CreateAccount'
+import SignInPage from './components/SignIn';
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
 
 const BASE_URL = `https://strangers-things.herokuapp.com/api/2302-ACC-CT-WEB-PT-A/`
@@ -12,9 +12,9 @@ function App() {
     <>
       
         <Routes>
-          <Route path="/" element={<RegisterSignInData />}/>
-          <Route path="login" element={<CreateAccount />}/>
-          <Route path="sign" element={<SignInPage />}/>
+          {/* <Route path='/' element={<></>}/> */}
+          <Route path="/create" element={<CreateAccount />}/>
+          <Route path="/sign" element={<SignInPage />}/>
         </Routes>
      
     </>

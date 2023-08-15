@@ -63,15 +63,9 @@ export default function PostView() {
                         </div>
                     )
                 }) 
-
-
                 /* end of js */
             } 
-
-
         </div>
-
-
 
     </>
     )

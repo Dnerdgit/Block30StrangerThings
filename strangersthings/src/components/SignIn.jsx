@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function SignInPage(token, setToken) {
+export default function SignInPage() {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
@@ -8,6 +8,7 @@ export default function SignInPage(token, setToken) {
       e.preventDefault();
       console.log(username, password)
       setUserName(username);
+      setPassword(password);
    }
 
   return (
@@ -39,8 +40,10 @@ export default function SignInPage(token, setToken) {
                 />
                 <br/>
                 <br/>
+
+                <button onClick={(() => (setPassword(password) ))}>Sign In</button>
        
-                <button onClick={setUserName === username && setPassword === password ? onClick="submit" : username && password}>Sign In</button>
+                {/* <button onClick={setUserName === username && setPassword === password ? onClick="submit" : username && password}>Sign In</button> */}
         </form>
     </div>
 

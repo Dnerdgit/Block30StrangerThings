@@ -18,28 +18,28 @@ export default function CreateAccount({ posted, setPosted }) {
         localStorage.setItem('pass', JSON.stringify(password));
         localStorage.setItem('aPass', JSON.stringify(acceptPass));
 
-        // }, [username, password]
-        }
+        }, [username, password]
+        
      )
 
     const handleSubmit = async (e) => {
       e.preventDefault();
       
-    //   const newProfile = await RegisterSignInData(username, password, acceptPass);
+      const newProfile = await RegisterSignInData(username, password, acceptPass);
         
-    //   console.log(newProfile);
-    //   if (newProfile) {
-    //     console.log("New User: ", newProfile.data.posts);
+      console.log(newProfile);
+      if (newProfile) {
+        console.log("New User: ", newProfile.data.posts);
 
-    //     const newProfileList = [...posted, newProfile.data.posts];
-    //     setPosted(newProfileList);
+        const newProfileList = [...posted, newProfile.data.posts];
+        setPosted(newProfileList);
 
-    //     setUsername(username);
-    //     setPassword(password);
-    //     setAcceptPass(acceptPass);
-    //   } else {
-    //     setError(error);
-    //   }
+        setUsername(username);
+        setPassword(password);
+        setAcceptPass(acceptPass);
+      } else {
+        setError(error);
+      }
    }
   return (
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { RegisterSignInData } from "../API";
 
 export default function CreateAccount({ posted, setPosted }) {
@@ -7,38 +7,22 @@ export default function CreateAccount({ posted, setPosted }) {
     const [acceptPass, setAcceptPass] = useState("");
     const [error, setError] = useState(null);
 
-
-    
     const handleSubmit = async (e) => {
-        
       e.preventDefault();
       const newProfile = await RegisterSignInData(username, password, acceptPass);
-      
-
-        useEffect(() => {
-
-            localStorage.setUsername("user", username);
-            localStorage.setPassword("pass", password);
-            localStorage.setAcceptPass("apass", acceptPass);
-
-            console.log(localStorage.getItem("user"))
-        }, [])
-
-        console.log(newProfile);
-    
-
+        
+      console.log(newProfile);
       if (newProfile) {
         console.log("New User: ", newProfile.data.posts);
 
         const newProfileList = [...posted, newProfile.data.posts];
-            
-            setPosted(newProfileList);
-            setUsername(username);
-            setPassword(password);
-            setAcceptPass(acceptPass);
-            
+        setPosted(newProfileList);
+
+        setUsername(username);
+        setPassword(password);
+        setAcceptPass(acceptPass);
       } else {
-        setError(newProfile.error.message);
+        setError(error);
       }
 
     //   setSignInPage();
@@ -52,6 +36,7 @@ export default function CreateAccount({ posted, setPosted }) {
         <form onSubmit={handleSubmit} className='sign-up-form'>
             <label>
                 Username 
+            </label>
             <input
                 id="name"
                 type="text"
@@ -59,11 +44,12 @@ export default function CreateAccount({ posted, setPosted }) {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 />
-            </label>
+            
                 <br/>
                 <br/>
             <label>
                 Password 
+            </label>
             <input
                 id="password"
                 type="password"
@@ -71,11 +57,12 @@ export default function CreateAccount({ posted, setPosted }) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 />
-            </label>
+            
                 <br/>
                 <br/>
             <label>
-                Confirm Password 
+                Confirm Password
+            </label>
             <input
                 id="acceptPass"
                 type="password"
@@ -83,7 +70,7 @@ export default function CreateAccount({ posted, setPosted }) {
                 value={acceptPass}
                 onChange={(e) => setAcceptPass(e.target.value)}
                 />
-                </label>
+
                 <br/>
                 <br/>
                 <button onClick={(() => (setAcceptPass(password) ))}>Continue</button>

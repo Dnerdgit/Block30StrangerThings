@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function SignInPage() {
+export default function SignInPage(token, setToken) {
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
@@ -8,8 +8,6 @@ export default function SignInPage() {
       e.preventDefault();
       console.log(username, password)
       setUserName(username);
-//       setPassword(password);
-//       setAcceptPass(acceptPass);
    }
 
   return (

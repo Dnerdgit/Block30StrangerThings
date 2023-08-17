@@ -56,6 +56,6 @@ export const RegisterSignInData = async (username, password) => {
 
 
 
-  /*POST /posts/POST_ID/messages: WILL CREATE A NEW MESSAGE FOR 
+/*POST /posts/POST_ID/messages: WILL CREATE A NEW MESSAGE FOR 
   POST whose _id EQUALS POST_ID(template literal,required)*/
 

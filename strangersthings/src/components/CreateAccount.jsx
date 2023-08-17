@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { RegisterSignInData } from "../API";
 
 export default function CreateAccount({ posted, setPosted }) {
@@ -7,19 +7,36 @@ export default function CreateAccount({ posted, setPosted }) {
     const [acceptPass, setAcceptPass] = useState("");
     const [error, setError] = useState(null);
 
+
+    
     const handleSubmit = async (e) => {
+        
       e.preventDefault();
       const newProfile = await RegisterSignInData(username, password, acceptPass);
-      console.log(newProfile);
-      if (newProfile.success) {
+      
+
+        useEffect(() => {
+
+            localStorage.setUsername("user", username);
+            localStorage.setPassword("pass", password);
+            localStorage.setAcceptPass("apass", acceptPass);
+
+            console.log(localStorage.getItem("user"))
+        }, [])
+
+        console.log(newProfile);
+    
+
+      if (newProfile) {
         console.log("New User: ", newProfile.data.posts);
 
         const newProfileList = [...posted, newProfile.data.posts];
-        setPosted(newProfileList);
-
-        setUsername(username);
-        setPassword(password);
-        setAcceptPass(acceptPass);
+            
+            setPosted(newProfileList);
+            setUsername(username);
+            setPassword(password);
+            setAcceptPass(acceptPass);
+            
       } else {
         setError(newProfile.error.message);
       }

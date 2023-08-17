@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { RegisterSignInData } from "../API";
 
 export default function CreateAccount({ posted, setPosted }) {
@@ -7,26 +7,39 @@ export default function CreateAccount({ posted, setPosted }) {
     const [acceptPass, setAcceptPass] = useState("");
     const [error, setError] = useState(null);
 
+    //     const getUser = JSON.parse(localStorage.getItem("user"))
+    //     const getPass = JSON.parse(localStorage.getItem("pass"))
+
+
+    useEffect(() => {
+        // console.log(username);
+        // console.log(password);
+        localStorage.setItem('user', JSON.stringify(username));
+        localStorage.setItem('pass', JSON.stringify(password));
+        localStorage.setItem('aPass', JSON.stringify(acceptPass));
+
+        // }, [username, password]
+        }
+     )
+
     const handleSubmit = async (e) => {
       e.preventDefault();
-      const newProfile = await RegisterSignInData(username, password, acceptPass);
+      
+    //   const newProfile = await RegisterSignInData(username, password, acceptPass);
         
-      console.log(newProfile);
-      if (newProfile) {
-        console.log("New User: ", newProfile.data.posts);
+    //   console.log(newProfile);
+    //   if (newProfile) {
+    //     console.log("New User: ", newProfile.data.posts);
 
-        const newProfileList = [...posted, newProfile.data.posts];
-        setPosted(newProfileList);
+    //     const newProfileList = [...posted, newProfile.data.posts];
+    //     setPosted(newProfileList);
 
-        setUsername(username);
-        setPassword(password);
-        setAcceptPass(acceptPass);
-      } else {
-        setError(error);
-      }
-
-    //   setSignInPage();
-     
+    //     setUsername(username);
+    //     setPassword(password);
+    //     setAcceptPass(acceptPass);
+    //   } else {
+    //     setError(error);
+    //   }
    }
   return (
 

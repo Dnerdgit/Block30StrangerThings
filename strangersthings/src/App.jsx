@@ -1,14 +1,16 @@
-import { useState } from 'react'
-import './App.css'
-import PostView from './components/PostView'
+import { useState } from "react";
+import "./App.css";
+import PostView from "./components/PostView";
 
 function App() {
+  const [token, setToken] = useState("here");
 
   return (
     <>
-      <PostView/>
+      <Posts token={token} />
+      <PostView />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

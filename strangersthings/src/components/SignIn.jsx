@@ -23,6 +23,7 @@ export default function SignInPage() {
                 type="text"
                 name="name"
                 value={username}
+                placeholder="Username"
                 onChange={(e) => setUserName(e.target.value)}
                 id="name"
                 />
@@ -35,13 +36,14 @@ export default function SignInPage() {
                 type="password"
                 name="password"
                 value={password}
+                placeholder="**********"
                 onChange={(e) => setPassword(e.target.value)}
                 id="password"
                 />
                 <br/>
                 <br/>
 
-                <button onClick={(() => (setPassword(password) ))}>Sign In</button>
+                <button onClick={(() => (setPassword(password)))}>Sign In</button>
        
                 {/* <button onClick={setUserName === username && setPassword === password ? onClick="submit" : username && password}>Sign In</button> */}
         </form>

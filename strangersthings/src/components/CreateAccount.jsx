@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useForm } from "react-hook-form"
 // import { RegisterSignInData } from "../API";
 // import useLocalStorage from '../hooks/useLocalStorage'
 // import { useNavigate } from 'react-router-dom';
@@ -17,6 +18,10 @@ export default function CreateAccount() {
         });
         const [confirmPass, setConfirmPass] = useState("");
         const [error, setError] = useState(null);
+        const {
+            create,
+            formState: { isDif },
+        } = useForm();
 
         // const navigate = useNavigate();
 
@@ -28,7 +33,7 @@ export default function CreateAccount() {
             localStorage.setItem('Password', JSON.stringify(password));
             localStorage.setItem('Confirm', JSON.stringify(confirmPass));
 
-            }, [username, password]
+            }, [username]
             
         )
 
@@ -37,7 +42,7 @@ export default function CreateAccount() {
 
     //     const newProfile = await RegisterSignInData(username, password, acceptPass);
 
-    //     if (password !== setAcceptPass) {
+    //     if (password !== setConfirmPass) {
     //         return;
     //     }
             
@@ -67,6 +72,7 @@ export default function CreateAccount() {
                     Username 
                 </label>
                 <input 
+                    // {...("Username".length >= 8 && "Username".length <= 20 ? "Username accepted" : error )}
                     id="name"
                     type="text"
                     name="name"

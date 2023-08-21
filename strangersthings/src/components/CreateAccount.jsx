@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form"
-// import { RegisterSignInData } from "../API";
+import { useNavigate } from 'react-router-dom';
+import { RegisterSignInData } from "../API";
+import { useLocalStorage } from '../hooks/useLocalStorage';
 // import useLocalStorage from '../hooks/useLocalStorage'
-// import { useNavigate } from 'react-router-dom';
+
 
 export default function CreateAccount() {
 
-        const [username, setUsername] = useState(() => {
-            const savedUser = localStorage.getItem("Username");
-            const parsedUser = JSON.parse(savedUser);
-            return parsedUser || "";
-        });
+        const [username, setUsername] = useLocalStorage("Username", "");
+        // useState(() => {
+            // const savedUser = localStorage.getItem("Username");
+            // const parsedUser = JSON.parse(savedUser);
+            // return parsedUser || "";
+        // });
         const [password, setPassword] = useState(() => {
             const savedPass = localStorage.getItem("Password");
             const parsedPass = JSON.parse(savedPass);
@@ -23,7 +26,7 @@ export default function CreateAccount() {
             formState: { errors },
         } = useForm();
 
-        // const navigate = useNavigate();
+        const navigate = useNavigate();
 
         useEffect(() => {
             localStorage.setItem('Username', JSON.stringify(username));
@@ -35,13 +38,13 @@ export default function CreateAccount() {
         )
 
         const handleSubmit = async (event) => {
-        event.preventDefault();
+            if (password !== setConfirmPass) {
+                return;
+            }
+            const newProfile = await RegisterSignInData(username, password, confirmPass);
+            event.preventDefault();
+            navigate("/posts");
 
-    //     const newProfile = await RegisterSignInData(username, password, acceptPass);
-
-    //     if (password !== setConfirmPass) {
-    //         return;
-    //     }
             
     //     console.log(newProfile);
     //     if (newProfile.success) {
@@ -82,7 +85,7 @@ export default function CreateAccount() {
                     onChange={(event) => setUsername(event.target.value)}
                     />
                     {errors.username?.type === 'required' && errors.username?.type <= 'minLength' && 
-                    <p>Username must be 8 characters minimum and 12 maximum.</p>}
+                    <p>Username must be 8 characters min and 12 max.</p>}
                     <br/>
                     <br/>
                 <label>
@@ -102,7 +105,7 @@ export default function CreateAccount() {
                     onChange={(event) => setPassword(event.target.value)}
                     />
                     {errors.password?.type === 'required' && errors.password?.type <= 'minLength' && 
-                    <p>Must be 10 characters minimum and 20 maximum.</p>}
+                    <p>Password must be 10 characters min and 20 max.</p>}
                     <br/>
                     <br/>
                 <label>

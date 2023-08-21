@@ -17,16 +17,13 @@ export default function CreateAccount() {
             return parsedPass || "";
         });
         const [confirmPass, setConfirmPass] = useState("");
-        const [error, setError] = useState(null);
+  
         const {
-            create,
-            formState: { isDif },
+            register,
+            formState: { errors },
         } = useForm();
 
         // const navigate = useNavigate();
-
-    
-
 
         useEffect(() => {
             localStorage.setItem('Username', JSON.stringify(username));
@@ -65,14 +62,18 @@ export default function CreateAccount() {
     return (
 
         <div className="signInApp">
-            {error && <p>{error}</p>}
+        
             <h2>Create Account</h2>
             <form onSubmit={handleSubmit} className='sign-up-form'>
                 <label>
                     Username 
                 </label>
-                <input 
-                    // {...("Username".length >= 8 && "Username".length <= 20 ? "Username accepted" : error )}
+                <input
+                    {...register("Username", {
+                        required: true,
+                        minLength: 8,
+                        maxLength: 12,
+                    })} 
                     id="name"
                     type="text"
                     name="name"
@@ -80,13 +81,19 @@ export default function CreateAccount() {
                     placeholder="Username"
                     onChange={(event) => setUsername(event.target.value)}
                     />
-                
+                    {errors.username?.type === 'required' && errors.username?.type <= 'minLength' && 
+                    <p>Username must be 8 characters minimum and 12 maximum.</p>}
                     <br/>
                     <br/>
                 <label>
                     Password 
                 </label>
                 <input
+                {...register("Password", {
+                    required: true,
+                    minLength: 10,
+                    maxLength: 20,
+                })} 
                     id="password"
                     type="password"
                     name="password"
@@ -94,13 +101,19 @@ export default function CreateAccount() {
                     placeholder="**********"
                     onChange={(event) => setPassword(event.target.value)}
                     />
-                
+                    {errors.password?.type === 'required' && errors.password?.type <= 'minLength' && 
+                    <p>Must be 10 characters minimum and 20 maximum.</p>}
                     <br/>
                     <br/>
                 <label>
                     Confirm Password
                 </label>
                 <input
+                    {...register("Confirm", {
+                        required: true,
+                        minLength: 10,
+                        maxLength: 20,
+                    })} 
                     id="confirmPass"
                     type="password"
                     name="confirmPass"

@@ -18,7 +18,9 @@ export default function PostView() {
             word = word.trim().toLowerCase();
 
             //shows all posts when search bar is empty, otherwise, display the matching fields
-            return word === '' ? post : post.title.toLowerCase().includes(word);
+            return word === '' ? post : post.title.toLowerCase().includes(word) || post.description.toLowerCase().includes(word) 
+            || post.price.toLowerCase().includes(word) || post.author.username.toLowerCase().includes(word) || 
+            post.location.toLowerCase().includes(word) ;
         }
     }
 
@@ -45,6 +47,7 @@ export default function PostView() {
             Posts();
     }, []);
 
+
     return (
     <>
             {/* FORM TO SEARCH FOR A POST */}
@@ -53,11 +56,9 @@ export default function PostView() {
                 <input className="posts-search-bar" value={searchPost} onChange={(e) => setSearchPost(e.target.value)} placeholder="Search Posts"  />
                 <button className="add-post" /* onClick={ () => newPostNav(`/posts/${}`) } */> Add Post </button>  
             </div>
-
+        
             {/* MAP OVER THE POSTS ARRAY AND RENDER IT */}
-            <div className="posts-container"> 
-                { /* start of js */
-
+                {
                     postsToShow.map((post, key) => {
                         //return this div
                         return (
@@ -67,14 +68,10 @@ export default function PostView() {
                                 <p id="post-keys">Price: {post.price} </p>
                                 <p id="post-keys"> Seller: {post.author.username} </p>
                                 <p id="post-keys"> Location: {post.location} </p>
-
                             </div>
                         )
                     }) 
-                    /* end of js */
                 } 
-            </div>
-
     </>
     )
 

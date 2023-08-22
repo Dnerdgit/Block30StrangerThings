@@ -45,6 +45,7 @@ export default function PostView() {
             Posts();
     }, []);
 
+
     return (
     <>
             {/* FORM TO SEARCH FOR A POST */}
@@ -53,28 +54,22 @@ export default function PostView() {
                 <input className="posts-search-bar" value={searchPost} onChange={(e) => setSearchPost(e.target.value)} placeholder="Search Posts"  />
                 <button className="add-post" /* onClick={ () => newPostNav(`/posts/${}`) } */> Add Post </button>  
             </div>
-
+        
             {/* MAP OVER THE POSTS ARRAY AND RENDER IT */}
-            <div className="posts-container"> 
-                { /* start of js */
-
+                {
                     postsToShow.map((post, key) => {
                         //return this div
                         return (
                             <div key={key} className="post">
-                                <h2> {post.title} </h2>
-                                <p> {post.description} </p>
-                                <p id="post-keys">Price: {post.price} </p>
-                                <p id="post-keys"> Seller: {post.author.username} </p>
-                                <p id="post-keys"> Location: {post.location} </p>
-
+                                <div> <h2> {post.title} </h2> </div>
+                                <div> {post.description} </div>
+                                <div id="post-keys">Price: {post.price} </div>
+                                <div id="post-keys"> Seller: {post.author.username} </div>
+                                <div id="post-keys"> Location: {post.location} </div>
                             </div>
                         )
                     }) 
-                    /* end of js */
                 } 
-            </div>
-
     </>
     )
 

@@ -2,17 +2,23 @@ import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
 import { RegisterSignInData } from "../API";
-import { useLocalStorage } from '../hooks/useLocalStorage';
-// import useLocalStorage from '../hooks/useLocalStorage'
+// import { useLocalStorage } from '../hooks/useLocalStorage';
 
 
 export default function CreateAccount() {
 
-        const [username, setUsername] = useLocalStorage("Username", "");
+
+        const [username, setUsername] = useState(() => {
+        const savedUser = localStorage.getItem("Username");
+        const parsedUser = JSON.parse(savedUser);
+            return parsedUser || "";
+        });
+
+        // const [username, setUsername] = useLocalStorage("Username", "");
         // useState(() => {
-            // const savedUser = localStorage.getItem("Username");
-            // const parsedUser = JSON.parse(savedUser);
-            // return parsedUser || "";
+        //     const savedUser = localStorage.getItem("Username");
+        //     const parsedUser = JSON.parse(savedUser);
+        //     return parsedUser || "";
         // });
         const [password, setPassword] = useState(() => {
             const savedPass = localStorage.getItem("Password");
@@ -41,16 +47,17 @@ export default function CreateAccount() {
             if (password !== setConfirmPass) {
                 return;
             }
-            const newProfile = await RegisterSignInData(username, password, confirmPass);
+            const response = await RegisterSignInData(username, password, confirmPass);
             event.preventDefault();
-            navigate("/posts");
-
+            if (response.success) {
+                navigate("/posts");
+            } else {
+                setError(errors);
+            }
+                
             
     //     console.log(newProfile);
-    //     if (newProfile.success) {
-
-
-    //         console.log("New User: ", newProfile.data.posts);
+    //     
 
     //         const newProfileList = [...posted, newProfile.data.posts];
     //         setPosted(newProfileList);
@@ -58,9 +65,7 @@ export default function CreateAccount() {
     //         setUsername(username);
     //         setPassword(password);
     //         setAcceptPass(acceptPass);
-    //     } else {
-    //         setError(error);
-    //     }
+    //    
     }
     return (
 

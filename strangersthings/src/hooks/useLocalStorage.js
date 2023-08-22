@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
-const getStorageValue = ({Username}, {}) => {
-    const savedUser = localStorage.getItem(Username);
+const getStorageValue = (username, []) => {
+    const savedUser = localStorage.getItem(username);
     const parsedUser = JSON.parse(savedUser);
         return parsedUser || "";
 }
 
-export const useLocalStorage = ({Username}, username) => {
+export const useLocalStorage = (username, []) => {
     const [username, setUsername] = useState(() => {
-        return getStorageValue({Username}, username);
+        return getStorageValue(username, []);
     })
 
 

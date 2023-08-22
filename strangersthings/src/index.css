@@ -103,6 +103,7 @@ h1, h2, p,div {
   float: left;
   justify-items: flex-start;
   background-color: white;
+  line-height: .6em;
 }
 /* individual post */
 

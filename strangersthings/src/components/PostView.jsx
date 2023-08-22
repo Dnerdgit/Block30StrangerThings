@@ -61,11 +61,11 @@ export default function PostView() {
                         //return this div
                         return (
                             <div key={key} className="post">
-                                <div> <h2> {post.title} </h2> </div>
-                                <div> {post.description} </div>
-                                <div id="post-keys">Price: {post.price} </div>
-                                <div id="post-keys"> Seller: {post.author.username} </div>
-                                <div id="post-keys"> Location: {post.location} </div>
+                                <h2> {post.title} </h2>
+                                <p> {post.description} </p>
+                                <p id="post-keys">Price: {post.price} </p>
+                                <p id="post-keys"> Seller: {post.author.username} </p>
+                                <p id="post-keys"> Location: {post.location} </p>
                             </div>
                         )
                     }) 

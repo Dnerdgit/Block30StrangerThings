@@ -18,7 +18,9 @@ export default function PostView() {
             word = word.trim().toLowerCase();
 
             //shows all posts when search bar is empty, otherwise, display the matching fields
-            return word === '' ? post : post.title.toLowerCase().includes(word);
+            return word === '' ? post : post.title.toLowerCase().includes(word) || post.description.toLowerCase().includes(word) 
+            || post.price.toLowerCase().includes(word) || post.author.username.toLowerCase().includes(word) || 
+            post.location.toLowerCase().includes(word) ;
         }
     }
 

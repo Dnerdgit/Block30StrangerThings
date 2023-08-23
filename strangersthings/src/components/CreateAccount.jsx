@@ -2,33 +2,38 @@ import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
 import { RegisterSignInData } from "../API";
-// import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 
 export default function CreateAccount() {
 
-
-        const [username, setUsername] = useState(() => {
-        const savedUser = localStorage.getItem("Username");
-        const parsedUser = JSON.parse(savedUser);
+        const [username, setUsername] = useLocalStorage("Username", "");
+        useState(() => {
+            const savedUser = localStorage.getItem("Username");
+            const parsedUser = JSON.parse(savedUser);
             return parsedUser || "";
         });
 
-        // const [username, setUsername] = useLocalStorage("Username", "");
-        // useState(() => {
-        //     const savedUser = localStorage.getItem("Username");
-        //     const parsedUser = JSON.parse(savedUser);
-        //     return parsedUser || "";
-        // });
-        const [password, setPassword] = useState(() => {
+        const [password, setPassword] = useLocalStorage("Password", "");
+        useState(() => {
             const savedPass = localStorage.getItem("Password");
             const parsedPass = JSON.parse(savedPass);
             return parsedPass || "";
         });
-        const [confirmPass, setConfirmPass] = useState("");
-  
+
+        const [confirmPass, setConfirmPass] = useLocalStorage("Confirm");
+        useState(() => {
+            const savedConfirm = localStorage.getItem("Confirm");
+            const parsedConfirm = JSON.parse(savedConfirm);
+            return parsedConfirm || "";
+        })
+        
+     
+        
         const {
             register,
+            handleSubmit,
+            watch,
             formState: { errors },
         } = useForm();
 
@@ -40,39 +45,27 @@ export default function CreateAccount() {
             localStorage.setItem('Confirm', JSON.stringify(confirmPass));
 
             }, [username]
-            
         )
 
-        const handleSubmit = async (event) => {
+        const onSubmit = async (event) => {
             if (password !== setConfirmPass) {
                 return;
             }
             const response = await RegisterSignInData(username, password, confirmPass);
             event.preventDefault();
             if (response.success) {
-                navigate("/posts");
+                navigate("/sign");
             } else {
                 setError(errors);
             }
-                
-            
-    //     console.log(newProfile);
-    //     
-
-    //         const newProfileList = [...posted, newProfile.data.posts];
-    //         setPosted(newProfileList);
-
-    //         setUsername(username);
-    //         setPassword(password);
-    //         setAcceptPass(acceptPass);
-    //    
-    }
+        }        
+    
     return (
 
         <div className="signInApp">
         
             <h2>Create Account</h2>
-            <form onSubmit={handleSubmit} className='sign-up-form'>
+            <form onSubmit={handleSubmit(onSubmit)} className='sign-up-form'>
                 <label>
                     Username 
                 </label>
@@ -129,14 +122,33 @@ export default function CreateAccount() {
                     placeholder="**********"
                     onChange={(event) => setConfirmPass(event.target.value)}
                     />
-
+                    {watch("Confirm") !== watch("Password")}
                     <br/>
                     <br/>
                     <button onClick={(() => (setConfirmPass(password) ))}>Submit</button>
             </form>
         </div>
 
-        )
-    }
+    )
+}
 
 // (setPassword === password) ? 'Login Accepted' : password
+
+
+// const [username, setUsername] = useState(() => {
+        //     const savedUser = localStorage.getItem("Username");
+        //     const parsedUser = JSON.parse(savedUser);
+        //     return parsedUser || "";
+        // });
+
+// const [password, setPassword] = useState(() => {
+        //     const savedPass = localStorage.getItem("Password");
+        //     const parsedPass = JSON.parse(savedPass);
+        //     return parsedPass || "";
+        // });
+
+// const [confirmPass, setConfirmPass] = useState(() => {
+        //     const savedConfirm = localStorage.getItem("Confirm");
+        //     const parsedConfirm = JSON.parse(savedConfirm);
+        //     return parsedConfirm || "";
+        // });

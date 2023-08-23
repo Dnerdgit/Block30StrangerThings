@@ -14,9 +14,8 @@ function App() {
     <>
       
         <Routes>
-          {/* <Route path='/' element={</>}/> ADD HOMEPAGE ELEMENT HERE*/}   
+          <Route path="/" element={<SignInPage />}/>
           <Route path="/create" element={<CreateAccount />}/>
-          <Route path="/signin" element={<SignInPage />}/>
           {/* <Route path ="/signout" element ={<SignOut />}/> */}
           {/* <Route path="/posts" element={< />}/> ADD POSTs ELEMENT HERE (add more if needed)*/}
         </Routes>

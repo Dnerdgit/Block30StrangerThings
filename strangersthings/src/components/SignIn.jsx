@@ -1,45 +1,82 @@
 import { useState } from 'react'
+import { SignInData } from "../API";
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 export default function SignInPage() {
-    const [username, setUserName] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUsername] = useLocalStorage("Username", "");
+        useState(() => {
+            const savedUser = localStorage.getItem("Username");
+            const parsedUser = JSON.parse(savedUser);
+            return parsedUser || "";
+        });
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      console.log(username, password)
-      setUserName(username);
-      setPassword(password);
+    const [password, setPassword] = useLocalStorage("Password", "");
+        useState(() => {
+            const savedPass = localStorage.getItem("Password");
+            const parsedPass = JSON.parse(savedPass);
+            return parsedPass || "";
+        });
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
+    const navigate = useNavigate();
+
+    const onSubmit = async (event) => {
+        if (password !== setPassword) {
+            return;
+        }
+        const response = await SignInData(username, password);
+        event.preventDefault();
+        if (response.success) {
+            navigate("/posts");
+        } else {
+            setError(errors);
+        }
    }
 
   return (
 
     <div className="signInApp">
         <h2>Sign In</h2>
-        <form onSubmit={handleSubmit} className='sign-up-form'>
+        <form onSubmit={handleSubmit(onSubmit)} className='sign-up-form'>
             <label>
                 Username 
             </label>
-            <input
+            <input 
+            {...register("Username", {
+                required: true,
+            })}
                 type="text"
                 name="name"
                 value={username}
                 placeholder="Username"
-                onChange={(e) => setUserName(e.target.value)}
+                onChange={(event) => setUsername(event.target.value)}
                 id="name"
                 />
+                {errors.username?.type === 'required' && <p>Invalid Username</p>}
                 <br/>
                 <br/>
             <label>
                 Password 
             </label>
             <input
+            {...register("Password", {
+                required: true,
+            })}
                 type="password"
                 name="password"
                 value={password}
                 placeholder="**********"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(event) => setPassword(event.target.value)}
                 id="password"
                 />
+                {errors.password?.type === 'required' && <p>Invalid Password</p>}
                 <br/>
                 <br/>
 

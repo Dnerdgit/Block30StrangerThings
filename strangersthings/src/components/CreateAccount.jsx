@@ -29,7 +29,6 @@ export default function CreateAccount() {
         })
         
      
-        
         const {
             register,
             handleSubmit,
@@ -131,24 +130,3 @@ export default function CreateAccount() {
 
     )
 }
-
-// (setPassword === password) ? 'Login Accepted' : password
-
-
-// const [username, setUsername] = useState(() => {
-        //     const savedUser = localStorage.getItem("Username");
-        //     const parsedUser = JSON.parse(savedUser);
-        //     return parsedUser || "";
-        // });
-
-// const [password, setPassword] = useState(() => {
-        //     const savedPass = localStorage.getItem("Password");
-        //     const parsedPass = JSON.parse(savedPass);
-        //     return parsedPass || "";
-        // });
-
-// const [confirmPass, setConfirmPass] = useState(() => {
-        //     const savedConfirm = localStorage.getItem("Confirm");
-        //     const parsedConfirm = JSON.parse(savedConfirm);
-        //     return parsedConfirm || "";
-        // });

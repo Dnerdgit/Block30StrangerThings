@@ -3,7 +3,6 @@ import { SignInData } from "../API";
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-// import { useAuth } from './Authenticate';
 
 export default function SignInPage() {
     const [username, setUsername] = useLocalStorage("Username", "");
@@ -20,7 +19,6 @@ export default function SignInPage() {
             return parsedPass || "";
         });
 
-    // const { handleAuth } = useAuth();
     const {
         register,
         handleSubmit,
@@ -36,11 +34,9 @@ export default function SignInPage() {
         const response = await SignInData(username, password);
         event.preventDefault();
         if (response.success) {
-            // handleAuth(true);
             navigate("/posts");
         } else {
             setError(errors);
-            // handleAuth(false);
         }
    }
 
@@ -51,8 +47,8 @@ export default function SignInPage() {
             <h1>Welcome to Strangers Things</h1>
         </div>
 
-        <div className="signInApp">
-            <h2>Sign In</h2>
+    <div className="signInApp">
+        <h2>Sign In</h2>
             <form onSubmit={handleSubmit(onSubmit)} className='sign-up-form'>
                 <label>
                     Username 
@@ -90,7 +86,8 @@ export default function SignInPage() {
                     <br/>
 
                     <button onClick={(() => (setPassword(password)))}>Sign In</button>
-        
+                    <br/>
+                    <a className="make-account" href="/create">Don't have an account. Sign up!</a>
             </form>
         </div>
     </div>

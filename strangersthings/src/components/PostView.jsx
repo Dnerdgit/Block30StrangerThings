@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate ,useParams } from "react-router-dom";
 
 
-export default function PostView() {
+export default function PostView({token}) {
     //using useState hook, create variables to hold posts and set players
     const [posts, setPosts] = useState([]);
     const [searchPost, setSearchPost] = useState(""); //store searched words in the post search bar in this state
@@ -36,7 +36,7 @@ export default function PostView() {
             try {
                 //gets array of post objects returned from fetch posts
                 const postObj = await fetchPosts();
-                //set the state
+                //s    et the state
                 setPosts(postObj);
                 console.log("POSTS", postObj);
             }
@@ -54,7 +54,8 @@ export default function PostView() {
             <div className="posts-navbar">
                 <h1> Posts </h1> 
                 <input className="posts-search-bar" value={searchPost} onChange={(e) => setSearchPost(e.target.value)} placeholder="Search Posts"  />
-                <button className="add-post" /* onClick={ () => newPostNav(`/posts/${}`) } */> Add Post </button>  
+                { /* USER IS LOGGED OUT, CAN'T ADD A POST */}
+                <button className="add-post"  onClick={ () => !token ? alert("Please Log In to add a Post")/*ADD NEW POST COMPONENT : (newPostNav(`/posts/${post.id}`)) */ : token} > Add Post </button>  
             </div>
         
             {/* MAP OVER THE POSTS ARRAY AND RENDER IT */}
@@ -68,6 +69,10 @@ export default function PostView() {
                                 <p id="post-keys">Price: {post.price} </p>
                                 <p id="post-keys"> Seller: {post.author.username} </p>
                                 <p id="post-keys"> Location: {post.location} </p>
+                                {/* SHOW THE SEND MESSAGE BUTTON WHEN THE POST IS BY A DIFFERENT USER (token is not for current user - token is null) */}
+                                {token && <button className="post-send-message" onClick={token} > SEND MESSAGE </button> }
+                                {/* IF USER (the token has been presented and not null anymore), SHOW THE VIEW BUTTON */}
+                                {!token && <button className="post-view-message" onClick={token} > VIEW </button> }
                             </div>
                         )
                     }) 

@@ -4,9 +4,11 @@ import PostView from './components/PostView'
 
 function App() {
 
+    const [token, setToken] = useState(null);
+
   return (
     <>
-      <PostView/>
+      <PostView token={token}/>
     </>
   )
 }

@@ -5,13 +5,13 @@ import CreateAccount from './components/CreateAccount'
 // import NAV BAR
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
-// import { AuthProvider } from './components/Authenticate';
+import { AuthProvider } from './components/Authenticate';
 // import { AuthProvider } from 'react-auth-kit';
 
 function App() {
 
   return (
-    // <AuthProvider>
+    <AuthProvider>
       
         <Routes>
           <Route path="/" element={<SignInPage />}/>
@@ -20,7 +20,7 @@ function App() {
           {/* <Route path="/posts" element={< />}/> ADD POSTs ELEMENT HERE (add more if needed)*/}
         </Routes>
      
-    // </AuthProvider>
+    </AuthProvider>
   )
 }
 

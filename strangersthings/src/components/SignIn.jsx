@@ -3,6 +3,7 @@ import { SignInData } from "../API";
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useAuth } from './Authenticate';
 
 export default function SignInPage() {
     const [username, setUsername] = useLocalStorage("Username", "");
@@ -19,6 +20,7 @@ export default function SignInPage() {
             return parsedPass || "";
         });
 
+    const handleAuth = useAuth();
     const {
         register,
         handleSubmit,
@@ -34,9 +36,11 @@ export default function SignInPage() {
         const response = await SignInData(username, password);
         event.preventDefault();
         if (response.success) {
+            handleAuth(true);
             navigate("/posts");
         } else {
             setError(errors);
+            handleAuth(false);
         }
    }
 

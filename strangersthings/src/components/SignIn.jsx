@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useAuth } from './Authenticate';
+import { Link } from 'react-router-dom'
 
 export default function SignInPage() {
     const [username, setUsername] = useLocalStorage("Username", "");
@@ -39,7 +40,7 @@ export default function SignInPage() {
             handleAuth(true);
             navigate("/posts");
         } else {
-            setError(errors);
+            alert("Invalid Entry");
             handleAuth(false);
         }
    }
@@ -89,7 +90,7 @@ export default function SignInPage() {
                     <br/>
                     <br/>
 
-                    <button onClick={(() => (setPassword(password)))}>Sign In</button>
+                    <button type="submit">Sign In</button>
                     <br/>
                     <a className="make-account" href="/create">Don't have an account. Sign up!</a>
             </form>

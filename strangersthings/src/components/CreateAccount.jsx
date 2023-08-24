@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
 import { RegisterSignInData } from "../API";
 import { useLocalStorage } from '../hooks/useLocalStorage';
+// import { Link } from 'react-router-dom';
 import { useAuth } from './Authenticate';
 
 
@@ -46,19 +47,25 @@ export default function CreateAccount() {
 
             }, [username]
         )
-
+        
+        // const handleInput = (event) => {
+        //     setUsername(prev => ({...prev, [event.target.name] : [event.target.value]}))
+        // }
         const onSubmit = async (event) => {
             event.preventDefault();
-            
+            // setUsername(username);
+            // setPassword(password);
+            // setConfirmPass(confirmPass);
+
             if (password !== setConfirmPass) {
                 return;
             }
-            const response = await RegisterSignInData(username, password, confirmPass);
+            const response = await RegisterSignInData(username, password);
             if (response.success) {
                 handleAuth(true);
                 navigate("/posts");
             } else {
-                setError(errors);
+                alert("Invalid Entry");
                 handleAuth(false);
             }
         }        
@@ -128,7 +135,7 @@ export default function CreateAccount() {
                     {watch("Confirm") !== watch("Password")}
                     <br/>
                     <br/>
-                    <button onClick={(() => (setConfirmPass(password)))}>Submit</button>
+                    <button type="submit">Submit</button>
                     <br/>
                     <a className="login-account" href="/">Already haven an account. Sign In.</a>
             </form>

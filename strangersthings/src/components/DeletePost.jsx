@@ -17,3 +17,9 @@ const deletePost = async (token) => {
     console.error(err);
   }
 };
+
+return (
+  <button className="delete" type="button">
+    Delete
+  </button>
+);

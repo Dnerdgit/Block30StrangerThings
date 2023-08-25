@@ -118,3 +118,12 @@ h1, h2, p,div {
   border: none;
   background-color: rgb(239, 235, 235);
 }
+
+/*message button in posts */
+.post-send-message, .post-view-message {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(156, 175, 192);
+  color: black;
+}
+

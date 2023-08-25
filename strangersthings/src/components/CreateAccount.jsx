@@ -20,12 +20,13 @@ export default function CreateAccount() {
             return parsedPass || "";
         });
 
-        // const [confirmPass, setConfirmPass] = useLocalStorage("confirm");
-        // useState(() => {
-        //     const savedConfirm = localStorage.getItem("confirm");
-        //     const parsedConfirm = JSON.parse(savedConfirm);
-        //     return parsedConfirm || "";
-        // })
+        const [confirmPass, setConfirmPass] = useLocalStorage("confirmPass");
+        useState(() => {
+            const savedConfirm = localStorage.getItem("confirmPass");
+            const parsedConfirm = JSON.parse(savedConfirm);
+            console.log(savedConfirm);
+            return parsedConfirm || "";
+        })
         
         // const handleAuth = useAuth();
         const {
@@ -41,7 +42,7 @@ export default function CreateAccount() {
             console.log(username);
             localStorage.setItem('username', JSON.stringify(username));
             localStorage.setItem('password', JSON.stringify(password));
-            // localStorage.setItem('confirm', JSON.stringify(confirmPass));
+            localStorage.setItem('confirm', JSON.stringify(confirmPass));
 
             }, [username]
         )
@@ -111,7 +112,7 @@ export default function CreateAccount() {
                      <p>Password must be 10 characters min and 20 max.</p>}
                     <br/>
                     <br/>
-                {/* <label>
+                <label>
                     Confirm Password
                 </label>
                 <input
@@ -129,9 +130,9 @@ export default function CreateAccount() {
                     placeholder="**********"
                     onChange={(event) => setConfirmPass(event.target.value)}
                     />
-                    {watch("confirm") !== watch("password")}
+                    {/* {watch("confirm") !== watch("password")} */}
                     <br/>
-                    <br/> */}
+                    <br/>
                     <button value="submit">Submit</button>
                     <br/>
                     <a className="login-account" href="/">Already haven an account. Sign In.</a>

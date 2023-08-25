@@ -6,7 +6,7 @@ import SignOutButton from './components/SignOut';
 // import NAV BAR
 import { Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './components/Authenticate';
-import PostTest from './components/PostsButtontest';
+
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
           <Route path="/" element={<SignInPage />}/>
           <Route path="/create" element={<CreateAccount />}/>
           <Route path ="/signout" element ={<SignOutButton />}/>
-          <Route path="/posts" element={<PostTest />}/> 
+          {/* <Route path="/posts" element={< />}/>  */}
         </Routes>
      
     </AuthProvider>

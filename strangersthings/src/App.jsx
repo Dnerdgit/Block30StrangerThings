@@ -12,13 +12,8 @@ function App() {
     currentSetForm(formName);
   };
 
-    const [token, setToken] = useState(null);
-
   return (
     <>
-<<<<<<< HEAD
-      <PostView token={token}/>
-=======
       <Navbar />
       <div className="App">
         <Routes>
@@ -28,7 +23,6 @@ function App() {
           />
         </Routes>
       </div>
->>>>>>> main
     </>
   );
 }

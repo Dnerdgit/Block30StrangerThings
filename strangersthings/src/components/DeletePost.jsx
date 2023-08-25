@@ -1,3 +1,5 @@
+import Posts from "./Post";
+
 const deletePost = async (token) => {
   try {
     const response = await fetch(
@@ -19,7 +21,7 @@ const deletePost = async (token) => {
 };
 
 return (
-  <button className="delete" type="button">
+  <button className="delete" type="button" onClick={handleDelete(post)}>
     Delete
   </button>
 );

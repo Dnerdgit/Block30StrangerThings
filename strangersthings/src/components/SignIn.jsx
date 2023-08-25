@@ -3,25 +3,24 @@ import { SignInData } from "../API";
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { useAuth } from './Authenticate';
-import { Link } from 'react-router-dom'
+// import { useAuth } from './Authenticate';
 
 export default function SignInPage() {
-    const [username, setUsername] = useLocalStorage("Username", "");
+    const [username, setUsername] = useLocalStorage("username", "");
         useState(() => {
-            const savedUser = localStorage.getItem("Username");
+            const savedUser = localStorage.getItem("username");
             const parsedUser = JSON.parse(savedUser);
             return parsedUser || "";
         });
 
-    const [password, setPassword] = useLocalStorage("Password", "");
+    const [password, setPassword] = useLocalStorage("password", "");
         useState(() => {
-            const savedPass = localStorage.getItem("Password");
+            const savedPass = localStorage.getItem("password");
             const parsedPass = JSON.parse(savedPass);
             return parsedPass || "";
         });
 
-    const handleAuth = useAuth();
+    // const handleAuth = useAuth();
     const {
         register,
         handleSubmit,
@@ -30,18 +29,17 @@ export default function SignInPage() {
 
     const navigate = useNavigate();
 
-    const onSubmit = async (event) => {
-        if (password !== setPassword) {
-            return;
-        }
-        const response = await SignInData(username, password);
+    const onSubmit = async (data, event) => {
         event.preventDefault();
+        console.log(data);
+        const response = await SignInData(data.username, data.password);
+        
         if (response.success) {
-            handleAuth(true);
+            // handleAuth(true);
             navigate("/posts");
         } else {
             alert("Invalid Entry");
-            handleAuth(false);
+            // handleAuth(false);
         }
    }
 
@@ -59,7 +57,7 @@ export default function SignInPage() {
                     Username 
                 </label>
                 <input 
-                {...register("Username", {
+                {...register("username", {
                     required: true,
                 })}
                     type="text"
@@ -76,7 +74,7 @@ export default function SignInPage() {
                     Password 
                 </label>
                 <input
-                {...register("Password", {
+                {...register("password", {
                     required: true,
                 })}
                     type="password"

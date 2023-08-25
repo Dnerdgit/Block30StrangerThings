@@ -3,34 +3,31 @@ import { useForm } from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
 import { RegisterSignInData } from "../API";
 import { useLocalStorage } from '../hooks/useLocalStorage';
-// import { Link } from 'react-router-dom';
 import { useAuth } from './Authenticate';
 
-
 export default function CreateAccount() {
-
-        const [username, setUsername] = useLocalStorage("Username", "");
+        const [username, setUsername] = useLocalStorage("username", "");
         useState(() => {
-            const savedUser = localStorage.getItem("Username");
+            const savedUser = localStorage.getItem("username");
             const parsedUser = JSON.parse(savedUser);
             return parsedUser || "";
         });
 
-        const [password, setPassword] = useLocalStorage("Password", "");
+        const [password, setPassword] = useLocalStorage("password", "");
         useState(() => {
-            const savedPass = localStorage.getItem("Password");
+            const savedPass = localStorage.getItem("password");
             const parsedPass = JSON.parse(savedPass);
             return parsedPass || "";
         });
 
-        const [confirmPass, setConfirmPass] = useLocalStorage("Confirm");
-        useState(() => {
-            const savedConfirm = localStorage.getItem("Confirm");
-            const parsedConfirm = JSON.parse(savedConfirm);
-            return parsedConfirm || "";
-        })
+        // const [confirmPass, setConfirmPass] = useLocalStorage("confirm");
+        // useState(() => {
+        //     const savedConfirm = localStorage.getItem("confirm");
+        //     const parsedConfirm = JSON.parse(savedConfirm);
+        //     return parsedConfirm || "";
+        // })
         
-        const handleAuth = useAuth();
+        // const handleAuth = useAuth();
         const {
             register,
             handleSubmit,
@@ -41,32 +38,26 @@ export default function CreateAccount() {
         const navigate = useNavigate();
 
         useEffect(() => {
-            localStorage.setItem('Username', JSON.stringify(username));
-            localStorage.setItem('Password', JSON.stringify(password));
-            localStorage.setItem('Confirm', JSON.stringify(confirmPass));
+            console.log(username);
+            localStorage.setItem('username', JSON.stringify(username));
+            localStorage.setItem('password', JSON.stringify(password));
+            // localStorage.setItem('confirm', JSON.stringify(confirmPass));
 
             }, [username]
         )
         
-        // const handleInput = (event) => {
-        //     setUsername(prev => ({...prev, [event.target.name] : [event.target.value]}))
-        // }
-        const onSubmit = async (event) => {
-            event.preventDefault();
-            // setUsername(username);
-            // setPassword(password);
-            // setConfirmPass(confirmPass);
 
-            if (password !== setConfirmPass) {
-                return;
-            }
-            const response = await RegisterSignInData(username, password);
+        const onSubmit = async (data, event) => {
+            event.preventDefault();
+            console.log(data);
+            const response = await RegisterSignInData(data.username, data.password);
+            console.log(response);
             if (response.success) {
-                handleAuth(true);
+                // handleAuth(true);
                 navigate("/posts");
             } else {
                 alert("Invalid Entry");
-                handleAuth(false);
+                // handleAuth(false);
             }
         }        
     
@@ -80,11 +71,13 @@ export default function CreateAccount() {
                     Username 
                 </label>
                 <input
-                    {...register("Username", {
-                        required: true,
-                        minLength: 8,
-                        maxLength: 12,
-                    })} 
+                    {...register("username") 
+                    // {
+                    //     required: true,
+                    //     minLength: 8,
+                    //     maxLength: 12,
+                    // })
+                    } 
                     id="name"
                     type="text"
                     name="name"
@@ -93,18 +86,20 @@ export default function CreateAccount() {
                     onChange={(event) => setUsername(event.target.value)}
                     />
                     {errors.username?.type === 'required' && errors.username?.type <= 'minLength' && 
-                    <p>Username must be 8 characters min and 12 max.</p>}
+                     <p>Username must be 8 characters min and 12 max.</p>}
                     <br/>
                     <br/>
                 <label>
                     Password 
                 </label>
                 <input
-                {...register("Password", {
-                    required: true,
-                    minLength: 10,
-                    maxLength: 20,
-                })} 
+                {...register("password") 
+                // {
+                //     required: true,
+                //     minLength: 10,
+                //     maxLength: 20,
+                // })
+                } 
                     id="password"
                     type="password"
                     name="password"
@@ -113,29 +108,31 @@ export default function CreateAccount() {
                     onChange={(event) => setPassword(event.target.value)}
                     />
                     {errors.password?.type === 'required' && errors.password?.type <= 'minLength' && 
-                    <p>Password must be 10 characters min and 20 max.</p>}
+                     <p>Password must be 10 characters min and 20 max.</p>}
                     <br/>
                     <br/>
-                <label>
+                {/* <label>
                     Confirm Password
                 </label>
                 <input
-                    {...register("Confirm", {
-                        required: true,
-                        minLength: 10,
-                        maxLength: 20,
-                    })} 
-                    id="confirmPass"
+                    {...register("confirm")
+                    // , {
+                    //     required: true,
+                    //     minLength: 10,
+                    //     maxLength: 20,
+                    // })
+                    } 
+                    id="password"
                     type="password"
                     name="confirmPass"
                     value={confirmPass}
                     placeholder="**********"
                     onChange={(event) => setConfirmPass(event.target.value)}
                     />
-                    {watch("Confirm") !== watch("Password")}
+                    {watch("confirm") !== watch("password")}
                     <br/>
-                    <br/>
-                    <button type="submit">Submit</button>
+                    <br/> */}
+                    <button value="submit">Submit</button>
                     <br/>
                     <a className="login-account" href="/">Already haven an account. Sign In.</a>
             </form>

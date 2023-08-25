@@ -6,14 +6,17 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
     const [isSignedIn, setIsSignedIn] = useState(
-        localStorage.getItem("Username") && localStorage.getItem("Password")
-        )
-    ;
+        localStorage.getItem("token"));
+    const [user, setUser] = useState(null);
 
-    const handleAuth = (signedIn) => {
+    const handleAuth = (signedIn, userData = null) => {
         setIsSignedIn(signedIn);
+        if (userData) {
+            console.log("Auth user", userData);
+            setUser(userData);
+        }
     };
-    return <AuthContext.Provider value ={{ isSignedIn, handleAuth}}>
+    return <AuthContext.Provider value ={{ isSignedIn, handleAuth }}>
         {children}
     </AuthContext.Provider>
 }

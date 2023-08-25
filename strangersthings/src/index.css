@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #c6afaf;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,11 +16,12 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #e8e8f0;
   text-decoration: inherit;
 }
 a:hover {
   color: #535bf2;
+  text-decoration: underline;
 }
 
 body {
@@ -32,14 +33,33 @@ body {
 }
 
 h1 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 3.2em;
   line-height: 1.1;
+  color: #213547;
+}
+
+h2 {
+  font-family: 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+div .signInApp {
+  padding: 30px;
+  border: 4px solid thick;
+  border-radius: 8px;
+  border-color: #979494;
+  background-color: #213547;
+}
+
+label {
+  padding:12px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  padding: 0.3em 0.6em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;

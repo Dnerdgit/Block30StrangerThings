@@ -7,8 +7,8 @@ const SignOutButton = () => {
     const { logout } = useAuth();
    
     useEffect(() => {
-        localStorage.removeItem('Username');
-        localStorage.removeItem('Password');
+        localStorage.removeItem('username');
+        localStorage.removeItem('password');
 
         localStorage.setItem("isSignedIn", false);
         logout(false);

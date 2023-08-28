@@ -24,7 +24,7 @@ function App() {
           <Routes>
             <Route path="/" element={<SignInPage />}/>
             <Route path="/create" element={<CreateAccount />}/>
-            <Route path ="/signout" element ={<SignOutButton />}/>
+            <Route path ="/logOut" element ={<SignOutButton />}/>
             <Route path="/posts" element={<PostView />}/> 
             <Route
               path="/profile"

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
 import { RegisterSignInData } from "../API";
 import { useSessionStorage } from '../hooks/useLocalStorage';
+import { useSignIn } from 'react-auth-kit';
 // import { useAuth } from './Authenticate';
 
 export default function CreateAccount() {
@@ -29,6 +30,7 @@ export default function CreateAccount() {
         // })
         
         // const handleAuth = useAuth();
+        const signIn = useSignIn();
         const {
             register,
             handleSubmit,
@@ -47,11 +49,15 @@ export default function CreateAccount() {
             }, [username]
         )
         
-
         const onSubmit = async (data, event) => {
             const response = await RegisterSignInData(data.username, data.password);
             event.preventDefault();
             console.log(data);
+
+            signIn({
+                token: response.data.token,
+                tokenType: "Bearer",
+            })
             
             console.log(response);
             if (response.success) {

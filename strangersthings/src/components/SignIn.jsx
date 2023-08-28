@@ -22,7 +22,7 @@ export default function SignInPage({token}) {
         });
 
     // const handleAuth = useAuth();
-    const signIn = useSignIn();
+    // const signIn = useSignIn();
     const {
         register,
         handleSubmit,
@@ -32,14 +32,14 @@ export default function SignInPage({token}) {
     const navigate = useNavigate();
 
     const onSubmit = async (data, event) => {
+        const response = await SignInData(data.username, data.password);
         event.preventDefault();
         console.log(data);
-        const response = await SignInData(data.username, data.password);
         
-        signIn({
-            token: response.data.token,
-            tokenType: "Bearer",
-        })
+        // signIn({
+        //     token: response.data.token,
+        //     tokenType: "Bearer",
+        // })
 
         if (response.success) {
             // signIn(true);

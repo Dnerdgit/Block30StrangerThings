@@ -4,22 +4,25 @@ import { useAuth } from './Authenticate';
 
 const SignOutButton = () => {
     const navigate = useNavigate();
-    const { logout } = useAuth();
+    // const logout = useAuth();
    
     useEffect(() => {
-        localStorage.removeItem('username');
-        localStorage.removeItem('password');
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('password');
 
-        localStorage.setItem("isSignedIn", false);
-        logout(false);
+        sessionStorage.setItem("isSignedIn", false);
+        // logout(false);
 
         navigate("/");
 
-    },[logout, navigate])
+    },[navigate])
 
     return (
+        <>
+        <h2>Ready to sign out?</h2>
 
-        <button onClick={logout}>Sign Out</button>
+        <button type="submit">Sign Out</button>
+        </>
     )
 }
 

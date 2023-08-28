@@ -1,10 +1,9 @@
-
 import './App.css'
 import { useState } from 'react';
 import SignInPage from './components/SignIn';
 import CreateAccount from './components/CreateAccount'
 import SignOutButton from './components/SignOut';
-// import POSTs HERE!
+import PostView from './components/PostView';
 import MessageForm from "./components/MessageForm";
 import Navbar from "./components/Navbar";
 import { Routes, Route } from 'react-router-dom'
@@ -26,7 +25,7 @@ function App() {
             <Route path="/" element={<SignInPage />}/>
             <Route path="/create" element={<CreateAccount />}/>
             <Route path ="/signout" element ={<SignOutButton />}/>
-            {/* <Route path="/posts" element={< />}/>  */}
+            <Route path="/posts" element={<PostView />}/> 
             <Route
               path="/profile"
               element={<MessageForm token={token} setToken={setToken} />}

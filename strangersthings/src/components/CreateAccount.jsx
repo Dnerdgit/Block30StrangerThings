@@ -2,20 +2,20 @@ import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
 import { RegisterSignInData } from "../API";
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useSessionStorage } from '../hooks/useLocalStorage';
 import { useAuth } from './Authenticate';
 
 export default function CreateAccount() {
-        const [username, setUsername] = useLocalStorage("username", "");
+        const [username, setUsername] = useSessionStorage("username", "");
         useState(() => {
-            const savedUser = localStorage.getItem("username");
+            const savedUser = sessionStorage.getItem("username");
             const parsedUser = JSON.parse(savedUser);
             return parsedUser || "";
         });
 
-        const [password, setPassword] = useLocalStorage("password", "");
+        const [password, setPassword] = useSessionStorage("password", "");
         useState(() => {
-            const savedPass = localStorage.getItem("password");
+            const savedPass = sessionStorage.getItem("password");
             const parsedPass = JSON.parse(savedPass);
             return parsedPass || "";
         });
@@ -40,8 +40,8 @@ export default function CreateAccount() {
 
         useEffect(() => {
             console.log(username);
-            localStorage.setItem('username', JSON.stringify(username));
-            localStorage.setItem('password', JSON.stringify(password));
+            sessionStorage.setItem('username', JSON.stringify(username));
+            sessionStorage.setItem('password', JSON.stringify(password));
             // localStorage.setItem('confirm', JSON.stringify(confirmPass));
 
             }, [username]

@@ -16,7 +16,7 @@ export function AuthProvider({ children }) {
             setUser(userData);
         }
     };
-    return <AuthContext.Provider value ={{ isSignedIn, handleAuth }}>
+    return <AuthContext.Provider value ={{ isSignedIn, user, handleAuth }}>
         {children}
     </AuthContext.Provider>
 }

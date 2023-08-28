@@ -4,14 +4,14 @@ import { useAuth } from './Authenticate';
 
 const SignOutButton = () => {
     const navigate = useNavigate();
-    // const logout = useAuth();
+    // const { handleAuth } = useAuth();
    
     useEffect(() => {
         sessionStorage.removeItem('username');
         sessionStorage.removeItem('password');
 
         sessionStorage.setItem("isSignedIn", false);
-        // logout(false);
+        // handleAuth(false);
 
         navigate("/");
 

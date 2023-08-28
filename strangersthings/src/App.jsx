@@ -7,7 +7,7 @@ import PostView from './components/PostView';
 import MessageForm from "./components/MessageForm";
 import Navbar from "./components/Navbar";
 import { Routes, Route } from 'react-router-dom'
-import { AuthProvider } from './components/Authenticate';
+import { AuthProvider } from 'react-auth-kit'; 
 
 function App() {
     const [currentForm, currentSetForm] = useState("login");

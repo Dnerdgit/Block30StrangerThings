@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useSessionStorage } from '../hooks/useLocalStorage';
 // import { useAuth } from './Authenticate';
+import { useSignIn } from 'react-auth-kit';
 
 export default function SignInPage({token}) {
     const [username, setUsername] = useSessionStorage("username", "");
@@ -21,6 +22,7 @@ export default function SignInPage({token}) {
         });
 
     // const handleAuth = useAuth();
+    const signIn = useSignIn();
     const {
         register,
         handleSubmit,
@@ -34,12 +36,17 @@ export default function SignInPage({token}) {
         console.log(data);
         const response = await SignInData(data.username, data.password);
         
+        signIn({
+            token: response.data.token,
+            tokenType: "Bearer",
+        })
+
         if (response.success) {
-            // handleAuth(true);
+            // signIn(true);
             navigate("/posts");
         } else {
             alert("Invalid Entry");
-            // handleAuth(false);
+            // signIn(false);
         }
    }
 

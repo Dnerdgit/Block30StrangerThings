@@ -2,25 +2,27 @@ import { useState } from 'react'
 import { SignInData } from "../API";
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useSessionStorage } from '../hooks/useLocalStorage';
 // import { useAuth } from './Authenticate';
+import { useSignIn } from 'react-auth-kit';
 
-export default function SignInPage() {
-    const [username, setUsername] = useLocalStorage("username", "");
+export default function SignInPage({token}) {
+    const [username, setUsername] = useSessionStorage("username", "");
         useState(() => {
-            const savedUser = localStorage.getItem("username");
+            const savedUser = sessionStorage.getItem("username");
             const parsedUser = JSON.parse(savedUser);
             return parsedUser || "";
         });
 
-    const [password, setPassword] = useLocalStorage("password", "");
+    const [password, setPassword] = useSessionStorage("password", "");
         useState(() => {
-            const savedPass = localStorage.getItem("password");
+            const savedPass = sessionStorage.getItem("password");
             const parsedPass = JSON.parse(savedPass);
             return parsedPass || "";
         });
 
     // const handleAuth = useAuth();
+    // const signIn = useSignIn();
     const {
         register,
         handleSubmit,
@@ -30,16 +32,21 @@ export default function SignInPage() {
     const navigate = useNavigate();
 
     const onSubmit = async (data, event) => {
+        const response = await SignInData(data.username, data.password);
         event.preventDefault();
         console.log(data);
-        const response = await SignInData(data.username, data.password);
         
+        // signIn({
+        //     token: response.data.token,
+        //     tokenType: "Bearer",
+        // })
+
         if (response.success) {
-            // handleAuth(true);
+            // signIn(true);
             navigate("/posts");
         } else {
             alert("Invalid Entry");
-            // handleAuth(false);
+            // signIn(false);
         }
    }
 
@@ -88,7 +95,7 @@ export default function SignInPage() {
                     <br/>
                     <br/>
 
-                    <button type="submit">Sign In</button>
+                    <button onClick={token} type="submit">Sign In</button>
                     <br/>
                     <a className="make-account" href="/create">Don't have an account. Sign up!</a>
             </form>

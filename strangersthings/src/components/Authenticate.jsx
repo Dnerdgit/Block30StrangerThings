@@ -1,12 +1,12 @@
 // import { AuthProvider } from 'react-auth-kit'
 import { createContext, useContext, useState } from 'react'
-// import { useLocalStorage } from '../hooks/useLocalStorage'
+// import { useSessionStorage } from '../hooks/useLocalStorage'
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
     const [isSignedIn, setIsSignedIn] = useState(
-        localStorage.getItem("token"));
+        sessionStorage.getItem("token"));
     const [user, setUser] = useState(null);
 
     const handleAuth = (signedIn, userData = null) => {
@@ -16,7 +16,7 @@ export function AuthProvider({ children }) {
             setUser(userData);
         }
     };
-    return <AuthContext.Provider value ={{ isSignedIn, handleAuth }}>
+    return <AuthContext.Provider value ={{ isSignedIn, user, handleAuth }}>
         {children}
     </AuthContext.Provider>
 }

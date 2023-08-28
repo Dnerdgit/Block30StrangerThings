@@ -87,9 +87,9 @@ label {
 }
 
 button {
-  width: 100%;
+  width: 40%;
   height: 45px;
-  background: white;
+  background: rgb(8, 24, 32);
   border: none;
   outline: none;
   border-radius: 40px;
@@ -98,6 +98,7 @@ button {
   font-size: 16px;
   columns: #333;
   font-weight: 600;
+  
 }
 
 

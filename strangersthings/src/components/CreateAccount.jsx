@@ -2,32 +2,35 @@ import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form"
 import { useNavigate } from 'react-router-dom';
 import { RegisterSignInData } from "../API";
-import { useLocalStorage } from '../hooks/useLocalStorage';
-import { useAuth } from './Authenticate';
+import { useSessionStorage } from '../hooks/useLocalStorage';
+import { useSignIn } from 'react-auth-kit';
+// import { useAuth } from './Authenticate';
 
 export default function CreateAccount() {
-        const [username, setUsername] = useLocalStorage("username", "");
+        const [username, setUsername] = useSessionStorage("username", "");
         useState(() => {
-            const savedUser = localStorage.getItem("username");
+            const savedUser = sessionStorage.getItem("username");
             const parsedUser = JSON.parse(savedUser);
             return parsedUser || "";
         });
 
-        const [password, setPassword] = useLocalStorage("password", "");
+        const [password, setPassword] = useSessionStorage("password", "");
         useState(() => {
-            const savedPass = localStorage.getItem("password");
+            const savedPass = sessionStorage.getItem("password");
             const parsedPass = JSON.parse(savedPass);
             return parsedPass || "";
         });
 
-        // const [confirmPass, setConfirmPass] = useLocalStorage("confirm");
+        // const [confirmPass, setConfirmPass] = useLocalStorage("confirmPass");
         // useState(() => {
-        //     const savedConfirm = localStorage.getItem("confirm");
+        //     const savedConfirm = localStorage.getItem("confirmPass");
         //     const parsedConfirm = JSON.parse(savedConfirm);
+        //     console.log(savedConfirm);
         //     return parsedConfirm || "";
         // })
         
         // const handleAuth = useAuth();
+        const signIn = useSignIn();
         const {
             register,
             handleSubmit,
@@ -39,18 +42,23 @@ export default function CreateAccount() {
 
         useEffect(() => {
             console.log(username);
-            localStorage.setItem('username', JSON.stringify(username));
-            localStorage.setItem('password', JSON.stringify(password));
+            sessionStorage.setItem('username', JSON.stringify(username));
+            sessionStorage.setItem('password', JSON.stringify(password));
             // localStorage.setItem('confirm', JSON.stringify(confirmPass));
 
             }, [username]
         )
         
-
         const onSubmit = async (data, event) => {
+            const response = await RegisterSignInData(data.username, data.password);
             event.preventDefault();
             console.log(data);
-            const response = await RegisterSignInData(data.username, data.password);
+
+            signIn({
+                token: response.data.token,
+                tokenType: "Bearer",
+            })
+            
             console.log(response);
             if (response.success) {
                 // handleAuth(true);
@@ -128,10 +136,10 @@ export default function CreateAccount() {
                     value={confirmPass}
                     placeholder="**********"
                     onChange={(event) => setConfirmPass(event.target.value)}
-                    />
-                    {watch("confirm") !== watch("password")}
+                    /> */}
+                    {/* {watch("confirm") !== watch("password")} */}
                     <br/>
-                    <br/> */}
+                    <br/>
                     <button value="submit">Submit</button>
                     <br/>
                     <a className="login-account" href="/">Already haven an account. Sign In.</a>

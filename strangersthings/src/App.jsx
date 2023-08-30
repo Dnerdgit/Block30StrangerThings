@@ -30,9 +30,12 @@ function App() {
               path="/profile"
               element={<MessageForm token={token} setToken={setToken} />}
             />
+            <Posts token={token} />
+            <PostView />
           </Routes>
       </AuthProvider>
     </div>
   )
 }
+
 export default App;
